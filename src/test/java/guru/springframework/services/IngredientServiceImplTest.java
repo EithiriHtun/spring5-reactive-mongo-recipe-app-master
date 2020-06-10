@@ -93,7 +93,6 @@ public class IngredientServiceImplTest {
 
 
     @Test
-    @Ignore
     public void testSaveRecipeCommand() throws Exception {
         //given
         IngredientCommand command = new IngredientCommand();
@@ -120,14 +119,13 @@ public class IngredientServiceImplTest {
         //then
         assertEquals("3", savedCommand.getId());
 
-        verify(recipeReactiveRepository, times(1)).findById(anyString()).block();
+        verify(recipeReactiveRepository, times(1)).findById(anyString());
 
-        verify(recipeReactiveRepository, times(1)).save(any(Recipe.class)).block();
+        verify(recipeReactiveRepository, times(1)).save(any(Recipe.class));
 
     }
 
     @Test
-    @Ignore
     public void testDeleteById() throws Exception {
 
         //given
@@ -143,12 +141,14 @@ public class IngredientServiceImplTest {
 
         when(recipeReactiveRepository.findById(anyString())).thenReturn(Mono.just(recipe));
 
+        when(recipeReactiveRepository.save(any(Recipe.class))).thenReturn(Mono.just(recipe));
+
         //when
         ingredientService.deleteById("1", "3").block();
 
         //then
-        verify(recipeReactiveRepository, times(1)).findById(anyString()).block();
+        verify(recipeReactiveRepository, times(1)).findById(anyString());
 
-        verify(recipeReactiveRepository, times(1)).save(any(Recipe.class)).block();
+        verify(recipeReactiveRepository, times(1)).save(any(Recipe.class));
     }
 }
