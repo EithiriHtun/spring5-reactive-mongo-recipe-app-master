@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/EiThiriHtun/spring5-reactive-mongo-recipe-app-master.svg?style=svg)](https://circleci.com/gh/EiThiriHtun/spring5-reactive-mongo-recipe-app-master)
+[![CircleCI](https://circleci.com/gh/EithiriHtun/spring5-reactive-mongo-recipe-app-master.svg?style=svg)](https://circleci.com/gh/EithiriHtun/spring5-reactive-mongo-recipe-app-master)
 
-[![codecov](https://codecov.io/gh/EiThiriHtun/spring5-reactive-mongo-recipe-app-master/branch/master/graph/badge.svg)](https://codecov.io/gh/EiThiriHtun/spring5-reactive-mongo-recipe-app-master)
+[![codecov](https://codecov.io/gh/EithiriHtun/spring5-reactive-mongo-recipe-app-master/branch/master/graph/badge.svg)](https://codecov.io/gh/EithiriHtun/spring5-reactive-mongo-recipe-app-master)
 
 # spring5-reactive-mongo-recipe-app-master
 Reactive Recipe Application Using MongoDB
