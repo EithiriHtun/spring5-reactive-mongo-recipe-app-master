@@ -43,15 +43,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by jt on 6/17/17.
  */
-@RunWith(SpringRunner.class)
-@WebFluxTest
-@Import(IndexController.class)
+//@RunWith(SpringRunner.class)
+//@WebFluxTest
+//@Import(IndexController.class)
 public class IndexControllerTest {
 
-    @Autowired
-    ApplicationContext applicationContext;
+    //@Autowired
+    //ApplicationContext applicationContext;
 
-    @MockBean
+    //@MockBean
+    @Mock
     RecipeService recipeService;
 
     @Mock
@@ -65,34 +66,34 @@ public class IndexControllerTest {
     @Before
     public void setUp() throws Exception {
 
-    //    MockitoAnnotations.initMocks(this);
+       MockitoAnnotations.initMocks(this);
 
-      //  controller = new IndexController(recipeService);
+        controller = new IndexController(recipeService);
 
-         webTestClient = WebTestClient.bindToController(controller).build();
+       //  webTestClient = WebTestClient.bindToController(controller).build();
     }
 
     @Test
     public void testMockMVC() throws Exception {
-       // MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         when(recipeService.getRecipes()).thenReturn(Flux.empty());
 
-      //  mockMvc.perform(get("/"))
-      //          .andExpect(status().isOk())
-      //          .andExpect(view().name("index"));
+        mockMvc.perform(get("/"))
+               .andExpect(status().isOk())
+                .andExpect(view().name("index"));
 
-        webTestClient.get().uri("/")
+       /* webTestClient.get().uri("/")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody();
+                .expectBody();*/
     }
 
     @Test
     public void getIndexPage() throws Exception {
 
         //given
-       /* Set<Recipe> recipes = new HashSet<>();
+       Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());
 
         Recipe recipe = new Recipe();
@@ -113,10 +114,10 @@ public class IndexControllerTest {
         verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         List<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2, setInController.size());*/
+        assertEquals(2, setInController.size());
     }
 
-    @Configuration
+    /*@Configuration
     //@EnableWebFlux
     static class WebConfig{
 
@@ -150,6 +151,6 @@ public class IndexControllerTest {
             //viewResolver.setViewNames(new String[] {"template/*"});
             return viewResolver;
         }
-    }
+    }*/
 
 }
