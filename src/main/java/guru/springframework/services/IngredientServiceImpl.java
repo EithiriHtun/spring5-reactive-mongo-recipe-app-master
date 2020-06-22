@@ -94,17 +94,14 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
-
         Recipe recipe = recipeReactiveRepository.findById(command.getRecipeId()).block();
 
         if (recipe == null) {
 
             //todo toss error if not found!
             log.error("Recipe not found for id: " + command.getRecipeId());
-
             return Mono.just(new IngredientCommand());
         } else {
-            // Recipe recipe = recipeOptional.get();
 
             Optional<Ingredient> ingredientOptional = recipe
                     .getIngredients()
@@ -116,15 +113,15 @@ public class IngredientServiceImpl implements IngredientService {
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(command.getDescription());
                 ingredientFound.setAmount(command.getAmount());
-                ingredientFound.setUom(unitOfMeasureReactiveRepository.findById(command.getUom().getId()).block());
-                //  .orElseThrow(() -> new RuntimeException("UOM NOT FOUND"))); //todo address this
+                ingredientFound.setUom(unitOfMeasureReactiveRepository
+                        .findById(command.getUom().getId()).block());
+
                 if (ingredientFound.getUom() == null) {
                     new RuntimeException("UOM NOT FOUND");
                 }
             } else {
                 //add new Ingredient
                 Ingredient ingredient = ingredientCommandToIngredient.convert(command);
-                //  ingredient.setRecipe(recipe);
                 recipe.addIngredient(ingredient);
             }
 
